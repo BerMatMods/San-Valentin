@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>San Valentín ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ff0066, #ff66cc, #ff0099, #cc0066);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+      color: white;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      opacity: 0;
+      color: white;
+      z-index: -1;
+      animation: float 18s infinite ease-in-out;
+      text-shadow: 0 0 10px #ff0066, 0 0 20px #ff0066;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.8;
+      }      90% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-105vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    h1 {
+      font-family: 'Creepster', cursive;
+      font-size: 2.6rem;
+      margin: 0 20px;
+      text-shadow: 0 0 12px rgba(255,255,255,0.9), 0 0 24px #ff0066;
+      color: white;
+      letter-spacing: 1px;
+      line-height: 1.3;
+    }
+
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      gap: 25px;
+    }
+
+    button {
+      padding: 16px 34px;
+      border: none;
+      border-radius: 60px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+      font-size: 1.4rem;
+      font-family: 'Creepster', cursive;
+      letter-spacing: 1px;
+    }
+
+    #btnSi {
+      background: linear-gradient(to right, #ff0066, #ff66cc);
+      color: white;
+      text-shadow: 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    #btnNo {
+      background: linear-gradient(to right, #444, #222);
+      color: white;
+      text-shadow: 0 0 6px rgba(0,0,0,0.7);
+    }
+    #btnSi:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #ff0066, 0 0 30px #ff66cc;
+    }
+
+    #btnNo:hover {
+      transform: scale(1.08);
+      background: linear-gradient(to right, #222, #000);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    img {
+      width: 260px;
+      height: auto;
+      margin-bottom: 25px;
+      border-radius: 20px;
+      border: 4px solid rgba(255,255,255,0.3);
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+      animation: pulse 3s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.03); }
+    }
+
+    .creditos {
+      position: absolute;
+      bottom: 12px;
+      font-family: 'Pacifico', cursive;
+      font-size: 1.25rem;
+      color: white;
+      text-shadow: 0 0 8px rgba(255,255,255,1), 0 0 16px #ff00cc, 0 0 24px #ff33ff;
+      letter-spacing: 1.5px;
+      z-index: 10;
+    }
+
+    #pantallaFinal h1 {
+      font-size: 2.8rem;
+      text-shadow: 0 0 14px rgba(255,255,255,1), 0 0 28px #ff0099;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="pantallaPregunta">
+    <img src="https://media.giphy.com/media/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Gatito saludando">    <h1>¿Quieres ser mi San Valentín? ❤️</h1>
+    <div class="buttons">
+      <button id="btnSi">SÍ</button>
+      <button id="btnNo">NO</button>
+    </div>
+  </div>
+
+  <div id="pantallaFinal" class="hidden">
+    <img src="https://stickerly.pstatic.net/sticker_pack/GKxNn91GyJYvRhMszE6eOQ/XJ2XIR/25/84108036.png" alt="Gatito Corazón">
+    <h1>¡En seriooo! 😍<br>Te amooo, gracias por ser mi San Valentín.</h1>
+  </div>
+
+  <div class="creditos">BerMatMods</div>
+
+  <script>
+    function crearCorazones() {
+      const cantidad = 30;
+      for (let i = 0; i < cantidad; i++) {
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤';
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (12 + Math.random() * 12) + 's';
+        heart.style.fontSize = (18 + Math.random() * 22) + 'px';
+        document.body.appendChild(heart);
+      }
+    }
+
+    const btnSi = document.getElementById('btnSi');
+    const btnNo = document.getElementById('btnNo');
+    const pantallaPregunta = document.getElementById('pantallaPregunta');
+    const pantallaFinal = document.getElementById('pantallaFinal');
+    let siFontSize = 1.4;
+
+    btnNo.addEventListener('click', () => {
+      siFontSize += 0.45;
+      btnSi.style.fontSize = siFontSize + "rem";
+      btnSi.style.padding = (16 + (siFontSize - 1.4) * 9) + "px " + (34 + (siFontSize - 1.4) * 18) + "px";
+
+      let noFontSize = 1.4 - (siFontSize * 0.13);
+      if (noFontSize > 0.45) {
+        btnNo.style.fontSize = noFontSize + "rem";
+      } else {
+        btnNo.style.display = 'none';
+      }
+
+      const maxX = window.innerWidth - btnNo.offsetWidth;
+      const maxY = window.innerHeight - btnNo.offsetHeight;
+      if (maxX > 0 && maxY > 0) {
+        btnNo.style.position = 'absolute';        btnNo.style.left = Math.random() * maxX + 'px';
+        btnNo.style.top = Math.random() * maxY + 'px';
+      }
+    });
+
+    btnSi.addEventListener('click', () => {
+      pantallaPregunta.classList.add('hidden');
+      pantallaFinal.classList.remove('hidden');
+    });
+
+    window.onload = crearCorazones;
+  </script>
+</body>
+</html>
